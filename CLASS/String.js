@@ -5,7 +5,7 @@ console.log(str1);
 //good way to concatenate strings(String Interpolation)
 console.log(`Hello my Course Name is ${str1}`); // Template Literal
 
-const game_count = new String("Manthan"); 
+const game_count = new String("Manthan"); //new String Object
 
 console.log(game_count.length);
 console.log(game_count[4]);

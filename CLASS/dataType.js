@@ -58,3 +58,34 @@ let func =function myname(){
 console.log(typeof func); // function
 console.log(func()); // Manthan
 
+
+//Memory :
+// There are two types of memory in JavaScript:
+// 1. Stack Memory: Used for static memory allocation and contains primitive data types and references to objects.
+// 2. Heap Memory: Used for dynamic memory allocation and stores objects and functions.
+
+//e.g of Stack Memory
+let myYoutubeName = "MMM";
+let NewYoutubeName = myYoutubeName;
+NewYoutubeName = "Manthan MMM";
+console.log(myYoutubeName);
+console.log(NewYoutubeName);
+
+//it does not change the value of myYoutubeName because primitive data types are stored in stack memory and each variable has its own copy of the value.
+//primitive data types store in stack when we assign a variable to another variable it creates a copy of the value.so changing one doesnt affect another.
+
+//e.g of Heap Memory
+let myobject = { name: "MMM",
+    age: 22,
+    id: 123
+ };
+
+ let myobject2 = myobject;
+ myobject.id = 25;
+
+ console.log(myobject.id);
+ console.log(myobject2.id);
+
+ //objects are stored in heap memory.when we assign an object to another variable it copies the reference not the actual object.so changing one affects another.
+ 
+ 
