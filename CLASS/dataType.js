@@ -88,4 +88,4 @@ let myobject = { name: "MMM",
 
  //objects are stored in heap memory.when we assign an object to another variable it copies the reference not the actual object.so changing one affects another.
  
- 
+ //
