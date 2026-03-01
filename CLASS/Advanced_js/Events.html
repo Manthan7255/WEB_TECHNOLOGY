@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Events Demo</title>
+
+    <style>
+        body {
+            background-color: #414141;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 15px;
+        }
+
+        img {
+            width: 200px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        a {
+            color: lightblue;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Amazing Images (Click to Remove)</h2>
+
+    <ul id="images">
+        <li>
+            <img id="photoshop"
+                src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg"
+                alt="Photoshop Logo">
+        </li>
+
+        <li>
+            <img id="japan"
+                src="https://images.unsplash.com/photo-1501785888041-af3ef285b470"
+                   onclick="alert('Hi')"
+                alt="Mount Fuji">
+        </li>
+
+        <li>
+            <img id="Nature"
+                src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b"
+                alt="Nature Image">
+        </li>
+
+        <li>
+            <img id="photoman"
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+                alt="Photographer">
+        </li>
+
+        <li>
+            <img id="tiger"
+                src="https://images.unsplash.com/photo-1546182990-dffeafbe841d"
+                alt="Tiger">
+        </li>
+
+        <li>
+            <a href="https://google.com" id="google">Visit Google</a>
+        </li>
+    </ul>
+  </body>
+  <script>
+    document.getElementById('tiger').onClick = function(){alert('hi')}
+    document.getElementById('photoman').addEventListener('click',function(e){console.log(e)})
+    document.getElementById('photoman').addEventListener('click',function(){console.log("clicking inside ul")},true)
+    document.getElementById('google').addEventListener('click',function(a){console.log(a)},true)
+    
+  </script>
+  </html>
+
+  //onclick="alert('Hi')" this is not good way html should contain structure and js should contain logic
+  //mixing both is a bad practice
+  //we can do it at basic level not for companies
+  //Select element assign function to event and when we click function 
+
+  //home assignment : check query use?
+  //type,time stamp,target,source element,current tag,client x,client y,screeen x,screen y,alt e, cltr 
+
+  //add event listner is js method used to attach a event handler to an html elements so that specific function runs when a perticular event occur 
+
+  //event propagation: event bubbleing,event captureing 
+
+  event bubbleing : iner ele to parent and parent to doc and if click to photoshop then output clicking photoshop and then clicking inside ul if you have done true the parent to child 
+  // document.getE
+
+
+  //home activity : 
