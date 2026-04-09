@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCore — Hospital Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ 
+<div id="landing-page" class="page active">
+ 
+  <!-- Top Navigation -->
+  <nav class="landing-nav" id="landingNav">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">MediCore</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="btn-primary" onclick="showDashboard()">Sign In →</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features" onclick="toggleMobileMenu()">Features</a>
+      <a href="#testimonials" onclick="toggleMobileMenu()">Testimonials</a>
+      <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+      <button class="btn-primary" onclick="showDashboard()">Sign In →</button>
+    </div>
+  </nav>
+ 
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Trusted by 500+ hospitals worldwide
+      </div>
+      <h1 class="hero-title">
+        Modern Care<br/>
+        <em>Seamlessly</em> Managed
+      </h1>
+      <p class="hero-subtitle">
+        MediCore unifies patient records, appointments, doctor schedules,
+        and real-time reports into one elegant platform — built for the
+        clinicians who never stop caring.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary btn-lg" onclick="showDashboard()">
+          Open Dashboard →
+        </button>
+        <a href="#features" class="btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>12k+</strong><span>Patients Managed</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>98%</strong><span>Satisfaction Rate</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>340+</strong><span>Specialist Doctors</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="dashboard-preview">
+        <div class="preview-bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="preview-title">MediCore Dashboard</span>
+        </div>
+        <div class="preview-body">
+          <div class="preview-sidebar">
+            <div class="ps-item active"></div>
+            <div class="ps-item"></div>
+            <div class="ps-item"></div>
+            <div class="ps-item"></div>
+          </div>
+          <div class="preview-main">
+            <div class="preview-cards">
+              <div class="pc card-blue"></div>
+              <div class="pc card-green"></div>
+              <div class="pc card-purple"></div>
+            </div>
+            <div class="preview-chart">
+              <div class="chart-bar" style="height:60%"></div>
+              <div class="chart-bar" style="height:80%"></div>
+              <div class="chart-bar" style="height:45%"></div>
+              <div class="chart-bar" style="height:90%"></div>
+              <div class="chart-bar" style="height:70%"></div>
+              <div class="chart-bar" style="height:55%"></div>
+              <div class="chart-bar" style="height:85%"></div>
+            </div>
+            <div class="preview-table">
+              <div class="pt-row header"></div>
+              <div class="pt-row"></div>
+              <div class="pt-row"></div>
+              <div class="pt-row"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-container">
+      <div class="section-label">Core Capabilities</div>
+      <h2 class="section-title">Everything your hospital needs,<br/>nothing it doesn't</h2>
+      <div class="features-grid">
+        <div class="feature-card" data-delay="0">
+          <div class="feature-icon" style="background:#EBF4FF;color:#2563EB">📅</div>
+          <h3>Smart Appointments</h3>
+          <p>Book, reschedule, and track patient appointments with intelligent conflict detection and real-time availability.</p>
+        </div>
+        <div class="feature-card" data-delay="100">
+          <div class="feature-icon" style="background:#F0FDF4;color:#16A34A">👨‍⚕️</div>
+          <h3>Doctor Management</h3>
+          <p>Maintain complete doctor profiles with specializations, schedules, and performance metrics all in one place.</p>
+        </div>
+        <div class="feature-card" data-delay="200">
+          <div class="feature-icon" style="background:#FFF7ED;color:#EA580C">🚨</div>
+          <h3>Emergency Alerts</h3>
+          <p>Instant emergency notifications routed to the right specialists with real-time bed availability tracking.</p>
+        </div>
+        <div class="feature-card" data-delay="300">
+          <div class="feature-icon" style="background:#FDF4FF;color:#9333EA">📊</div>
+          <h3>Advanced Reports</h3>
+          <p>Visual analytics dashboards give administration the insight needed to make data-driven operational decisions.</p>
+        </div>
+        <div class="feature-card" data-delay="400">
+          <div class="feature-icon" style="background:#FFF1F2;color:#E11D48">🫀</div>
+          <h3>Patient Records</h3>
+          <p>Comprehensive electronic health records with medical history, prescriptions, and diagnostic reports secured and accessible.</p>
+        </div>
+        <div class="feature-card" data-delay="500">
+          <div class="feature-icon" style="background:#F0FDFA;color:#0D9488">🔒</div>
+          <h3>Secure & Compliant</h3>
+          <p>HIPAA-compliant data management with end-to-end encryption and role-based access controls for every user type.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-container">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">Loved by healthcare<br/>professionals</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"MediCore transformed how we manage our 800-bed hospital. Patient wait times dropped by 40% in the first three months."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#DBEAFE">DR</div>
+            <div>
+              <strong>Dr. Rajesh Mehta</strong>
+              <span>Chief of Medicine, Apollo Hospital</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card featured">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"The reporting module alone saves our administrative team 15 hours per week. The interface is intuitive — doctors adopted it instantly."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#D1FAE5">SA</div>
+            <div>
+              <strong>Sarah Anderson</strong>
+              <span>Hospital Administrator, Fortis Healthcare</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Finally a system that doesn't require a training manual. My residents were up and running on day one."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#EDE9FE">PK</div>
+            <div>
+              <strong>Dr. Priya Kapoor</strong>
+              <span>Head of Cardiology, AIIMS Delhi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="logo-icon">✦</span>
+          <span class="logo-text">MediCore</span>
+        </div>
+        <p>Modern hospital management for the clinicians who never stop caring.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link">𝕏</a>
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">f</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#">Features</a>
+          <a href="#">Pricing</a>
+          <a href="#">Security</a>
+          <a href="#">Changelog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@medicore.health">hello@medicore.health</a>
+          <a href="tel:+911800123456">+91 1800-123-456</a>
+          <a href="#">Mumbai, Maharashtra</a>
+          <a href="#">Support Center</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 MediCore. All rights reserved.</p>
+      <div>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     DASHBOARD APP
+════════════════════════════════════════════════ -->
+<div id="app-page" class="page">
+ 
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">MediCore</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-section="dashboard" onclick="switchSection('dashboard', this)">
+        <span class="nav-icon">⊞</span><span>Dashboard</span>
+      </a>
+      <a class="nav-item" data-section="patients" onclick="switchSection('patients', this)">
+        <span class="nav-icon">👤</span><span>Patients</span>
+      </a>
+      <a class="nav-item" data-section="doctors" onclick="switchSection('doctors', this)">
+        <span class="nav-icon">👨‍⚕️</span><span>Doctors</span>
+      </a>
+      <a class="nav-item" data-section="appointments" onclick="switchSection('appointments', this)">
+        <span class="nav-icon">📅</span><span>Appointments</span>
+      </a>
+      <a class="nav-item" data-section="reports" onclick="switchSection('reports', this)">
+        <span class="nav-icon">📊</span><span>Reports</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-ghost sidebar-logout" onclick="showLanding()">← Back to Site</button>
+    </div>
+  </aside>
+ 
+  <!-- Main Content -->
+  <div class="main-wrapper">
+ 
+    <!-- Top Navbar -->
+    <header class="topbar">
+      <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-right">
+        <button class="notif-btn" onclick="toggleNotifications()" title="Notifications">
+          🔔
+          <span class="notif-badge" id="notifBadge">3</span>
+        </button>
+        <div class="profile-chip">
+          <div class="profile-avatar">AD</div>
+          <span class="profile-name">Admin</span>
+        </div>
+      </div>
+      <!-- Notification Dropdown -->
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header">Notifications</div>
+        <div class="notif-item unread">
+          <div class="notif-dot"></div>
+          <div>
+            <strong>New Patient Registered</strong>
+            <p>Aanya Sharma added to Patient #1042</p>
+            <time>2 min ago</time>
+          </div>
+        </div>
+        <div class="notif-item unread">
+          <div class="notif-dot"></div>
+          <div>
+            <strong>Appointment Confirmed</strong>
+            <p>Dr. Mehta — 3:00 PM today</p>
+            <time>18 min ago</time>
+          </div>
+        </div>
+        <div class="notif-item unread">
+          <div class="notif-dot"></div>
+          <div>
+            <strong>Report Generated</strong>
+            <p>Monthly summary is ready</p>
+            <time>1 hour ago</time>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-dot" style="background:transparent;border:2px solid var(--border)"></div>
+          <div>
+            <strong>Doctor Schedule Updated</strong>
+            <p>Dr. Kapoor — availability changed</p>
+            <time>Yesterday</time>
+          </div>
+        </div>
+        <button class="btn-ghost notif-clear" onclick="clearNotifications()">Mark all as read</button>
+      </div>
+    </header>
+ 
+    <!-- ── SECTION: DASHBOARD ── -->
+    <section class="content-section active" id="section-dashboard">
+      <div class="section-header">
+        <h1>Overview</h1>
+        <p>Welcome back, Admin. Here's what's happening today.</p>
+      </div>
+ 
+      <div class="stats-grid">
+        <div class="stat-card" style="--accent:#2563EB;--accent-bg:#EBF4FF">
+          <div class="stat-icon">👤</div>
+          <div class="stat-info">
+            <div class="stat-label">Total Patients</div>
+            <div class="stat-value" id="statPatients">0</div>
+            <div class="stat-change positive">↑ 12% this month</div>
+          </div>
+        </div>
+        <div class="stat-card" style="--accent:#16A34A;--accent-bg:#F0FDF4">
+          <div class="stat-icon">👨‍⚕️</div>
+          <div class="stat-info">
+            <div class="stat-label">Active Doctors</div>
+            <div class="stat-value" id="statDoctors">0</div>
+            <div class="stat-change positive">↑ 3 new this week</div>
+          </div>
+        </div>
+        <div class="stat-card" style="--accent:#9333EA;--accent-bg:#FDF4FF">
+          <div class="stat-icon">📅</div>
+          <div class="stat-info">
+            <div class="stat-label">Appointments Today</div>
+            <div class="stat-value" id="statAppointments">0</div>
+            <div class="stat-change">→ 4 pending</div>
+          </div>
+        </div>
+        <div class="stat-card" style="--accent:#EA580C;--accent-bg:#FFF7ED">
+          <div class="stat-icon">🛏️</div>
+          <div class="stat-info">
+            <div class="stat-label">Beds Available</div>
+            <div class="stat-value">87</div>
+            <div class="stat-change negative">↓ 8% occupied</div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="dashboard-grid">
+        <!-- Recent Patients -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3>Recent Patients</h3>
+            <button class="btn-link" onclick="switchSection('patients', document.querySelector('[data-section=patients]'))">View all →</button>
+          </div>
+          <div id="recentPatientsList" class="recent-list"></div>
+        </div>
+ 
+        <!-- Quick Actions -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3>Quick Actions</h3>
+          </div>
+          <div class="quick-actions">
+            <button class="qa-btn" onclick="switchSection('patients', document.querySelector('[data-section=patients]')); setTimeout(()=>openPatientModal(),200)">
+              <span>➕</span> Add Patient
+            </button>
+            <button class="qa-btn" onclick="switchSection('doctors', document.querySelector('[data-section=doctors]')); setTimeout(()=>openDoctorModal(),200)">
+              <span>🩺</span> Add Doctor
+            </button>
+            <button class="qa-btn" onclick="switchSection('appointments', document.querySelector('[data-section=appointments]'))">
+              <span>📅</span> New Appointment
+            </button>
+            <button class="qa-btn" onclick="switchSection('reports', document.querySelector('[data-section=reports]'))">
+              <span>📊</span> View Reports
+            </button>
+          </div>
+        </div>
+ 
+        <!-- Today's Appointments -->
+        <div class="dash-card full-width">
+          <div class="dash-card-header">
+            <h3>Today's Appointments</h3>
+            <button class="btn-link" onclick="switchSection('appointments', document.querySelector('[data-section=appointments]'))">View all →</button>
+          </div>
+          <div id="todayAppointmentsList" class="recent-list"></div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ── SECTION: PATIENTS ── -->
+    <section class="content-section" id="section-patients">
+      <div class="section-header">
+        <div>
+          <h1>Patient Management</h1>
+          <p>Manage all registered patients and their records.</p>
+        </div>
+        <button class="btn-primary" onclick="openPatientModal()">+ Add Patient</button>
+      </div>
+ 
+      <div class="search-bar-container">
+        <input type="text" id="patientSearch" class="search-input" placeholder="🔍  Search patients by name or condition…" oninput="renderPatientTable()" />
+      </div>
+ 
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Condition</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="patientTableBody"></tbody>
+        </table>
+        <div id="patientEmpty" class="empty-state" style="display:none">
+          <span>👤</span>
+          <p>No patients found. Add your first patient!</p>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ── SECTION: DOCTORS ── -->
+    <section class="content-section" id="section-doctors">
+      <div class="section-header">
+        <div>
+          <h1>Doctor Management</h1>
+          <p>View and manage all doctors and their schedules.</p>
+        </div>
+        <button class="btn-primary" onclick="openDoctorModal()">+ Add Doctor</button>
+      </div>
+ 
+      <div class="search-bar-container">
+        <input type="text" id="doctorSearch" class="search-input" placeholder="🔍  Search doctors by name or specialization…" oninput="renderDoctorCards()" />
+      </div>
+ 
+      <div id="doctorCardsGrid" class="doctor-grid"></div>
+      <div id="doctorEmpty" class="empty-state" style="display:none">
+        <span>👨‍⚕️</span>
+        <p>No doctors added yet. Add your first doctor!</p>
+      </div>
+    </section>
+ 
+    <!-- ── SECTION: APPOINTMENTS ── -->
+    <section class="content-section" id="section-appointments">
+      <div class="section-header">
+        <div>
+          <h1>Appointment System</h1>
+          <p>Book and track all patient appointments.</p>
+        </div>
+      </div>
+ 
+      <div class="appt-layout">
+        <!-- Booking Form -->
+        <div class="appt-form-card">
+          <h3>Book Appointment</h3>
+          <form id="appointmentForm" onsubmit="bookAppointment(event)">
+            <div class="form-group">
+              <label>Patient Name *</label>
+              <input type="text" id="apptPatient" placeholder="Enter patient name" required />
+              <span class="field-error" id="apptPatientErr"></span>
+            </div>
+            <div class="form-group">
+              <label>Doctor *</label>
+              <select id="apptDoctor" required>
+                <option value="">Select a doctor</option>
+              </select>
+              <span class="field-error" id="apptDoctorErr"></span>
+            </div>
+            <div class="form-group">
+              <label>Date *</label>
+              <input type="date" id="apptDate" required />
+              <span class="field-error" id="apptDateErr"></span>
+            </div>
+            <div class="form-group">
+              <label>Time *</label>
+              <select id="apptTime" required>
+                <option value="">Select time slot</option>
+                <option>09:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+                <option>02:00 PM</option>
+                <option>03:00 PM</option>
+                <option>04:00 PM</option>
+                <option>05:00 PM</option>
+              </select>
+              <span class="field-error" id="apptTimeErr"></span>
+            </div>
+            <div class="form-group">
+              <label>Reason / Notes</label>
+              <textarea id="apptNotes" placeholder="Brief reason for visit…" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Confirm Appointment</button>
+          </form>
+        </div>
+ 
+        <!-- Appointment List -->
+        <div class="appt-list-card">
+          <div class="appt-list-header">
+            <h3>All Appointments</h3>
+            <input type="text" id="apptSearch" class="search-input" style="max-width:240px" placeholder="🔍 Search…" oninput="renderAppointmentList()" />
+          </div>
+          <div id="appointmentList"></div>
+          <div id="apptEmpty" class="empty-state" style="display:none">
+            <span>📅</span>
+            <p>No appointments booked yet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ── SECTION: REPORTS ── -->
+    <section class="content-section" id="section-reports">
+      <div class="section-header">
+        <div>
+          <h1>Reports & Analytics</h1>
+          <p>Visualize hospital performance and trends.</p>
+        </div>
+        <button class="btn-primary" onclick="exportReport()">↓ Export Report</button>
+      </div>
+ 
+      <div class="reports-summary-grid">
+        <div class="report-summary-card" style="--c:#2563EB">
+          <div class="rs-label">This Month — Patients</div>
+          <div class="rs-value" id="rsTotalPatients">0</div>
+        </div>
+        <div class="report-summary-card" style="--c:#16A34A">
+          <div class="rs-label">This Month — Appointments</div>
+          <div class="rs-value" id="rsTotalAppts">0</div>
+        </div>
+        <div class="report-summary-card" style="--c:#9333EA">
+          <div class="rs-label">Active Doctors</div>
+          <div class="rs-value" id="rsTotalDoctors">0</div>
+        </div>
+        <div class="report-summary-card" style="--c:#EA580C">
+          <div class="rs-label">Avg. Appointments / Doctor</div>
+          <div class="rs-value" id="rsAvgAppts">0</div>
+        </div>
+      </div>
+ 
+      <div class="charts-grid">
+        <!-- Gender Distribution -->
+        <div class="chart-card">
+          <h3>Patient Gender Distribution</h3>
+          <div class="donut-chart-container">
+            <canvas id="genderChart" width="200" height="200"></canvas>
+            <div class="donut-center" id="genderCenter">–</div>
+          </div>
+          <div class="chart-legend" id="genderLegend"></div>
+        </div>
+ 
+        <!-- Conditions Bar Chart -->
+        <div class="chart-card wide">
+          <h3>Patients by Condition</h3>
+          <div class="bar-chart-container" id="conditionChart"></div>
+        </div>
+ 
+        <!-- Appointments by Doctor -->
+        <div class="chart-card wide">
+          <h3>Appointments by Doctor</h3>
+          <div class="bar-chart-container" id="doctorApptChart"></div>
+        </div>
+ 
+        <!-- Appointment Status -->
+        <div class="chart-card">
+          <h3>Appointment Status</h3>
+          <div class="donut-chart-container">
+            <canvas id="statusChart" width="200" height="200"></canvas>
+            <div class="donut-center" id="statusCenter">–</div>
+          </div>
+          <div class="chart-legend" id="statusLegend"></div>
+        </div>
+      </div>
+    </section>
+ 
+  </div><!-- end main-wrapper -->
+</div><!-- end app-page -->
+ 
+ 
+<!-- ═══════════════════════════════════════════════
+     MODALS
+════════════════════════════════════════════════ -->
+ 
+<!-- Patient Modal -->
+<div class="modal-overlay" id="patientModal" onclick="closeModal('patientModal', event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="patientModalTitle">Add Patient</h2>
+      <button class="modal-close" onclick="closeModalById('patientModal')">✕</button>
+    </div>
+    <form id="patientForm" onsubmit="savePatient(event)">
+      <input type="hidden" id="patientId" />
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="patientName" placeholder="e.g. Aanya Sharma" required />
+          <span class="field-error" id="patientNameErr"></span>
+        </div>
+        <div class="form-group">
+          <label>Age *</label>
+          <input type="number" id="patientAge" placeholder="e.g. 34" min="1" max="130" required />
+          <span class="field-error" id="patientAgeErr"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Gender *</label>
+          <select id="patientGender" required>
+            <option value="">Select gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Blood Group</label>
+          <select id="patientBlood">
+            <option value="">Unknown</option>
+            <option>A+</option><option>A−</option>
+            <option>B+</option><option>B−</option>
+            <option>O+</option><option>O−</option>
+            <option>AB+</option><option>AB−</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Condition / Diagnosis *</label>
+          <input type="text" id="patientCondition" placeholder="e.g. Hypertension" required />
+          <span class="field-error" id="patientConditionErr"></span>
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="patientStatus">
+            <option>Active</option>
+            <option>Recovered</option>
+            <option>Critical</option>
+            <option>Discharged</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="patientPhone" placeholder="+91 98765 43210" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-ghost" onclick="closeModalById('patientModal')">Cancel</button>
+        <button type="submit" class="btn-primary" id="patientSubmitBtn">Add Patient</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Doctor Modal -->
+<div class="modal-overlay" id="doctorModal" onclick="closeModal('doctorModal', event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="doctorModalTitle">Add Doctor</h2>
+      <button class="modal-close" onclick="closeModalById('doctorModal')">✕</button>
+    </div>
+    <form id="doctorForm" onsubmit="saveDoctor(event)">
+      <input type="hidden" id="doctorId" />
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="doctorName" placeholder="e.g. Dr. Priya Kapoor" required />
+          <span class="field-error" id="doctorNameErr"></span>
+        </div>
+        <div class="form-group">
+          <label>Specialization *</label>
+          <input type="text" id="doctorSpec" placeholder="e.g. Cardiologist" required />
+          <span class="field-error" id="doctorSpecErr"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Experience (years) *</label>
+          <input type="number" id="doctorExp" placeholder="e.g. 8" min="0" max="60" required />
+          <span class="field-error" id="doctorExpErr"></span>
+        </div>
+        <div class="form-group">
+          <label>Availability</label>
+          <select id="doctorAvail">
+            <option>Available</option>
+            <option>Busy</option>
+            <option>On Leave</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone *</label>
+        <input type="tel" id="doctorPhone" placeholder="+91 98765 43210" required />
+        <span class="field-error" id="doctorPhoneErr"></span>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="doctorEmail" placeholder="doctor@hospital.com" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-ghost" onclick="closeModalById('doctorModal')">Cancel</button>
+        <button type="submit" class="btn-primary" id="doctorSubmitBtn">Add Doctor</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Delete Confirm Modal -->
+<div class="modal-overlay" id="deleteModal" onclick="closeModal('deleteModal', event)">
+  <div class="modal modal-sm">
+    <div class="modal-header">
+      <h2>Confirm Delete</h2>
+      <button class="modal-close" onclick="closeModalById('deleteModal')">✕</button>
+    </div>
+    <p style="padding:0 1.5rem 1.5rem;color:var(--text-muted)">Are you sure you want to delete this record? This action cannot be undone.</p>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModalById('deleteModal')">Cancel</button>
+      <button class="btn-danger" id="confirmDeleteBtn">Delete</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+ 
+<script src="script.js"></script>
+</body>
+</html>
