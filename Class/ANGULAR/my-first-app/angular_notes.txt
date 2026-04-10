@@ -1,0 +1,43 @@
+package.json : it is a configuration file info about your project
+packagelogout.json : it is also an confugration file but in detail
+angular.json : project configuration(styles,scripts,build settings,entry point)
+styles.css : global CSS styles
+.getignore : version control file
+tsconfig.json : typescript configuration
+index.html : main html file loads angular
+main.ts : entry point 
+app.config.ts : app config file
+
+
+there are two types of datatypes primitive and non primitive
+
+let age: number = 21;
+
+let name: string = "Manthan";
+
+let isActive: boolean = true;
+
+let x: null = null;
+
+let y: undefined = undefined;
+
+let sym: symbol = Symbol("id");
+
+let bigNum: bigint = 12345678901234567890n;
+
+
+-> components is a ui blocks of structure when we create component components create four files html,css,ts
+
+ng generate component component name
+
+-> there are three types of app binding 
+interpolation{{value}}
+property : [propert]="value"
+event : {event} = "handler()"
+Two-way
+
+-> databinding is used to connect ui to code
+
+types of databinding
+1.one-way
+2.two-way
