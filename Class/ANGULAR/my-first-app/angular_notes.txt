@@ -41,3 +41,6 @@ Two-way
 types of databinding
 1.one-way
 2.two-way
+   > ng model [(ngmodel)]
+
+Activity 1: how we can use for loop,switch cases and angular block in angular
