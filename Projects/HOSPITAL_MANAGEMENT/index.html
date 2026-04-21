@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicConnect - Issue Reporting Platform</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Controls */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg);
+        }
+
+        .btn-success {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            background: var(--surface);
+            color: var(--text);
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            background: var(--surface);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        /* Grid Layout */
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Issue Card */
+        .issue-card {
+            background: var(--surface);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .issue-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .issue-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--bg);
+        }
+
+        .issue-content {
+            padding: 1.5rem;
+        }
+
+        .issue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.75rem;
+        }
+
+        .issue-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .category-pothole { background: #fef3c7; color: #92400e; }
+        .category-streetlight { background: #dbeafe; color: #1e40af; }
+        .category-garbage { background: #d1fae5; color: #065f46; }
+        .category-water { background: #cffafe; color: #155e75; }
+        .category-road { background: #f3f4f6; color: #374151; }
+        .category-other { background: #fae8ff; color: #86198f; }
+
+        .issue-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-progress { background: #dbeafe; color: #1e40af; }
+        .status-resolved { background: #d1fae5; color: #065f46; }
+
+        .issue-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .issue-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .issue-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .issue-location {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .issue-votes {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vote-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .vote-btn:hover, .vote-btn.voted {
+            color: var(--primary);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--surface);
+            border-radius: 1rem;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            animation: modalSlide 0.3s ease-out;
+        }
+
+        @keyframes modalSlide {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .form-label span {
+            color: var(--danger);
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--border);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.02);
+        }
+
+        .file-upload input {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .preview-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+
+        /* Detail View */
+        .detail-view {
+            display: none;
+        }
+
+        .detail-view.active {
+            display: block;
+        }
+
+        .detail-header {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .comments-section {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .comment {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comment:last-child {
+            border-bottom: none;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .comment-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--text);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 2000;
+            animation: toastSlide 0.3s ease-out;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        @keyframes toastSlide {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 1.875rem;
+            }
+
+            .stats-bar {
+                gap: 1.5rem;
+            }
+
+            .issues-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+        }
+
+        /* Loading */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg) 25%, #e2e8f0 50%, var(--bg) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 0.5rem;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--text);
+        }
+
+        /* Priority Badge */
+        .priority-high { background: #fee2e2; color: #991b1b; }
+        .priority-medium { background: #fef3c7; color: #92400e; }
+        .priority-low { background: #dbeafe; color: #1e40af; }
+
+        /* Map placeholder */
+        .map-container {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-pin {
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showView('home')">
+                <div class="logo-icon">🏛️</div>
+                CivicConnect
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" class="active" onclick="showView('home')" id="nav-home">Issues</a></li>
+                <li><a href="#" onclick="openModal()">Report Issue</a></li>
+                <li><a href="#" onclick="showView('my-reports')" id="nav-my">My Reports</a></li>
+                <li><a href="#" onclick="showView('about')">About</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero-section">
+        <h1>Improve Your Community</h1>
+        <p>Report civic issues directly to your municipality. Track progress and collaborate with neighbors to build a better city.</p>
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value" id="stat-reported">0</div>
+                <div class="stat-label">Issues Reported</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="stat-resolved">0</div>
+                <div class="stat-label">Resolved</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="stat-progress">0</div>
+                <div class="stat-label">In Progress</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="stat-citizens">0</div>
+                <div class="stat-label">Active Citizens</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Home View -->
+        <div id="view-home">
+            <div class="tabs">
+                <button class="tab active" onclick="setTab('all')">All Issues</button>
+                <button class="tab" onclick="setTab('pending')">Pending</button>
+                <button class="tab" onclick="setTab('progress')">In Progress</button>
+                <button class="tab" onclick="setTab('resolved')">Resolved</button>
+                <button class="tab" onclick="setTab('nearby')">Nearby</button>
+            </div>
+
+            <div class="section-header">
+                <h2 class="section-title" id="issues-title">Recent Issues</h2>
+                <button class="btn btn-primary" onclick="openModal()">
+                    <span>+</span> Report New Issue
+                </button>
+            </div>
+
+            <div class="filters">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Search issues..." id="search-input" oninput="filterIssues()">
+                </div>
+                <div class="filter-group">
+                    <select class="filter-select" id="category-filter" onchange="filterIssues()">
+                        <option value="">All Categories</option>
+                        <option value="pothole">Potholes</option>
+                        <option value="streetlight">Streetlights</option>
+                        <option value="garbage">Garbage</option>
+                        <option value="water">Water Supply</option>
+                        <option value="road">Road Damage</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select class="filter-select" id="sort-filter" onchange="filterIssues()">
+                        <option value="newest">Newest First</option>
+                        <option value="votes">Most Voted</option>
+                        <option value="priority">Priority</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="issues-grid" id="issues-grid">
+                <!-- Issues will be rendered here -->
+            </div>
+
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <div class="empty-icon">📭</div>
+                <h3>No issues found</h3>
+                <p>Be the first to report an issue in your area!</p>
+            </div>
+        </div>
+
+        <!-- My Reports View -->
+        <div id="view-my-reports" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">My Reports</h2>
+                <button class="btn btn-primary" onclick="openModal()">Report New Issue</button>
+            </div>
+            <div class="issues-grid" id="my-issues-grid"></div>
+        </div>
+
+        <!-- Detail View -->
+        <div id="view-detail" class="detail-view">
+            <button class="btn btn-secondary" onclick="showView('home')" style="margin-bottom: 1rem;">
+                ← Back to Issues
+            </button>
+            
+            <div class="detail-header">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                    <span class="issue-category" id="detail-category">Category</span>
+                    <span class="issue-status" id="detail-status">Status</span>
+                </div>
+                <h1 style="font-size: 1.875rem; margin-bottom: 0.5rem;" id="detail-title">Issue Title</h1>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;" id="detail-description">Description</p>
+                
+                <div class="map-container">
+                    <div class="map-pin">📍</div>
+                    <span id="detail-location">Location</span>
+                </div>
+
+                <div style="display: flex; gap: 2rem; font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                    <span>Reported by <strong id="detail-reporter">Anonymous</strong></span>
+                    <span id="detail-date">Date</span>
+                    <span id="detail-id">ID: #1234</span>
+                </div>
+
+                <div class="detail-actions">
+                    <button class="btn btn-primary" id="detail-vote-btn" onclick="toggleVoteDetail()">
+                        👍 Support Issue (<span id="detail-votes">0</span>)
+                    </button>
+                    <button class="btn btn-secondary" onclick="shareIssue()">
+                        📤 Share
+                    </button>
+                </div>
+            </div>
+
+            <div class="comments-section">
+                <h3 style="margin-bottom: 1.5rem;">Updates & Comments</h3>
+                <div id="comments-list">
+                    <!-- Comments rendered here -->
+                </div>
+                <div class="comment-form">
+                    <div class="comment-avatar" id="current-user-avatar">Y</div>
+                    <div style="flex: 1;">
+                        <input type="text" class="form-input" placeholder="Add a comment or update..." id="comment-input">
+                    </div>
+                    <button class="btn btn-primary" onclick="addComment()">Post</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- About View -->
+        <div id="view-about" style="display: none;">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">About CivicConnect</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8;">
+                    CivicConnect is a digital platform designed to bridge the gap between citizens and their local municipality. 
+                    Our mission is to make civic issue reporting transparent, efficient, and collaborative.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                    <div style="background: var(--surface); padding: 2rem; border-radius: 1rem; border: 1px solid var(--border);">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📸</div>
+                        <h3 style="margin-bottom: 0.5rem;">Photo Evidence</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">Attach photos to provide clear visual context for faster resolution.</p>
+                    </div>
+                    <div style="background: var(--surface); padding: 2rem; border-radius: 1rem; border: 1px solid var(--border);">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📊</div>
+                        <h3 style="margin-bottom: 0.5rem;">Real-time Tracking</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">Track the status of your reported issues from submission to resolution.</p>
+                    </div>
+                    <div style="background: var(--surface); padding: 2rem; border-radius: 1rem; border: 1px solid var(--border);">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🤝</div>
+                        <h3 style="margin-bottom: 0.5rem;">Community Power</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">Upvote issues that matter to you and collaborate with neighbors.</p>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 3rem; border-radius: 1rem; text-align: center;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Have an issue to report?</h3>
+                    <p style="opacity: 0.9; margin-bottom: 1.5rem;">Join thousands of citizens making their city better.</p>
+                    <button class="btn" style="background: white; color: var(--primary);" onclick="openModal()">Report Issue Now</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Report Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Report New Issue</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="report-form" onsubmit="submitIssue(event)">
+                    <div class="form-group">
+                        <label class="form-label">Issue Title <span>*</span></label>
+                        <input type="text" class="form-input" id="issue-title" placeholder="e.g., Large pothole on Main Street" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Category <span>*</span></label>
+                        <select class="form-select" id="issue-category" required>
+                            <option value="">Select category</option>
+                            <option value="pothole">Pothole</option>
+                            <option value="streetlight">Streetlight</option>
+                            <option value="garbage">Garbage Collection</option>
+                            <option value="water">Water Supply</option>
+                            <option value="road">Road Damage</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Priority</label>
+                        <select class="form-select" id="issue-priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Description <span>*</span></label>
+                        <textarea class="form-textarea" id="issue-description" placeholder="Describe the issue in detail..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Location <span>*</span></label>
+                        <input type="text" class="form-input" id="issue-location" placeholder="e.g., 123 Main St, Near City Park" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Photos</label>
+                        <div class="file-upload" onclick="document.getElementById('issue-photos').click()">
+                            <input type="file" id="issue-photos" accept="image/*" multiple onchange="handleFileSelect(event)">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📷</div>
+                            <p style="font-weight: 600; margin-bottom: 0.25rem;">Click to upload photos</p>
+                            <p style="font-size: 0.875rem; color: var(--text-secondary);">or drag and drop</p>
+                        </div>
+                        <div class="file-preview" id="file-preview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" class="form-input" id="issue-reporter" placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Contact Email</label>
+                        <input type="email" class="form-input" id="issue-email" placeholder="john@example.com">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 1rem;">
+                        Submit Report
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span id="toast-icon">✅</span>
+        <span id="toast-message">Operation successful</span>
+    </div>
+
+    <script>
+        // State
+        let issues = JSON.parse(localStorage.getItem('civic-issues')) || [];
+        let currentView = 'home';
+        let currentTab = 'all';
+        let selectedFiles = [];
+        let currentIssueId = null;
+        let votedIssues = JSON.parse(localStorage.getItem('voted-issues')) || [];
+
+        // Demo data if empty
+        if (issues.length === 0) {
+            issues = [
+                {
+                    id: 1,
+                    title: "Large pothole causing accidents near school",
+                    description: "There is a deep pothole on Oak Street right in front of Lincoln Elementary School. Multiple vehicles have been damaged and it's dangerous for children crossing the street.",
+                    category: "pothole",
+                    status: "progress",
+                    priority: "high",
+                    location: "Oak St & 5th Ave, Near Lincoln Elementary",
+                    reporter: "Sarah Johnson",
+                    email: "sarah.j@email.com",
+                    date: new Date(Date.now() - 86400000 * 2).toISOString(),
+                    votes: 24,
+                    images: [],
+                    comments: [
+                        { author: "Municipality", text: "Team dispatched for inspection. Temporary barriers placed.", time: new Date(Date.now() - 86400000).toISOString(), official: true }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Streetlight not working - very dark at night",
+                    description: "The streetlight on Maple Avenue between 12th and 13th street has been out for over a week. The area is extremely dark and unsafe for pedestrians.",
+                    category: "streetlight",
+                    status: "pending",
+                    priority: "medium",
+                    location: "Maple Ave, Between 12th & 13th St",
+                    reporter: "Mike Chen",
+                    email: "mchen@email.com",
+                    date: new Date(Date.now() - 86400000 * 5).toISOString(),
+                    votes: 18,
+                    images: [],
+                    comments: []
+                },
+                {
+                    id: 3,
+                    title: "Garbage not collected for 2 weeks",
+                    description: "Residential garbage on Cedar Lane hasn't been picked up for two weeks. Trash is piling up and creating health hazards and bad odors.",
+                    category: "garbage",
+                    status: "resolved",
+                    priority: "high",
+                    location: "Cedar Lane, Block 400-500",
+                    reporter: "Emily Rodriguez",
+                    email: "emily.r@email.com",
+                    date: new Date(Date.now() - 86400000 * 10).toISOString(),
+                    votes: 45,
+                    images: [],
+                    comments: [
+                        { author: "Municipality", text: "Collection truck had mechanical issues. Service resumed and backlog cleared.", time: new Date(Date.now() - 86400000 * 3).toISOString(), official: true },
+                        { author: "Emily Rodriguez", text: "Thank you! Everything is clean now.", time: new Date(Date.now() - 86400000 * 2).toISOString(), official: false }
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Water leakage from main pipe",
+                    description: "There is a significant water leak from the main supply pipe on Pine Street. Water has been flowing onto the road for 3 days.",
+                    category: "water",
+                    status: "progress",
+                    priority: "high",
+                    location: "Pine St & Broadway",
+                    reporter: "David Kim",
+                    email: "dkim@email.com",
+                    date: new Date(Date.now() - 86400000 * 3).toISOString(),
+                    votes: 31,
+                    images: [],
+                    comments: []
+                },
+                {
+                    id: 5,
+                    title: "Damaged sidewalk - wheelchair inaccessible",
+                    description: "The sidewalk on Elm Street has severe cracks and uplifted sections due to tree roots. It's impossible to navigate with a wheelchair or stroller.",
+                    category: "road",
+                    status: "pending",
+                    priority: "medium",
+                    location: "Elm St, Between 1st and 3rd Ave",
+                    reporter: "Lisa Thompson",
+                    email: "lisa.t@email.com",
+                    date: new Date(Date.now() - 86400000 * 7).toISOString(),
+                    votes: 12,
+                    images: [],
+                    comments: []
+                }
+            ];
+            saveIssues();
+        }
+
+        function saveIssues() {
+            localStorage.setItem('civic-issues', JSON.stringify(issues));
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStats();
+            filterIssues();
+            setupDragDrop();
+        });
+
+        // View Management
+        function showView(view) {
+            currentView = view;
+            
+            // Hide all views
+            document.getElementById('view-home').style.display = 'none';
+            document.getElementById('view-my-reports').style.display = 'none';
+            document.getElementById('view-detail').style.display = 'none';
+            document.getElementById('view-about').style.display = 'none';
+            document.getElementById('hero-section').style.display = 'none';
+
+            // Update nav
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            
+            if (view === 'home') {
+                document.getElementById('view-home').style.display = 'block';
+                document.getElementById('hero-section').style.display = 'block';
+                document.getElementById('nav-home').classList.add('active');
+                filterIssues();
+            } else if (view === 'my-reports') {
+                document.getElementById('view-my-reports').style.display = 'block';
+                document.getElementById('hero-section').style.display = 'block';
+                document.getElementById('nav-my').classList.add('active');
+                renderMyIssues();
+            } else if (view === 'detail') {
+                document.getElementById('view-detail').style.display = 'block';
+                document.getElementById('view-detail').classList.add('active');
+            } else if (view === 'about') {
+                document.getElementById('view-about').style.display = 'block';
+                document.getElementById('hero-section').style.display = 'block';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Tab Management
+        function setTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            filterIssues();
+        }
+
+        // Filtering
+        function filterIssues() {
+            const search = document.getElementById('search-input').value.toLowerCase();
+            const category = document.getElementById('category-filter').value;
+            const sort = document.getElementById('sort-filter').value;
+            
+            let filtered = issues.filter(issue => {
+                const matchesSearch = issue.title.toLowerCase().includes(search) || 
+                                    issue.description.toLowerCase().includes(search) ||
+                                    issue.location.toLowerCase().includes(search);
+                const matchesCategory = !category || issue.category === category;
+                const matchesTab = currentTab === 'all' || issue.status === currentTab;
+                
+                return matchesSearch && matchesCategory && matchesTab;
+            });
+
+            // Sort
+            if (sort === 'newest') {
+                filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            } else if (sort === 'votes') {
+                filtered.sort((a, b) => b.votes - a.votes);
+            } else if (sort === 'priority') {
+                const priorityOrder = { high: 3, medium: 2, low: 1 };
+                filtered.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
+            }
+
+            renderIssues(filtered, 'issues-grid');
+            
+            const emptyState = document.getElementById('empty-state');
+            if (filtered.length === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+
+            // Update title
+            const titles = {
+                all: 'Recent Issues',
+                pending: 'Pending Issues',
+                progress: 'In Progress',
+                resolved: 'Resolved Issues',
+                nearby: 'Issues Nearby'
+            };
+            document.getElementById('issues-title').textContent = titles[currentTab] || 'Issues';
+        }
+
+        // Rendering
+        function renderIssues(issuesList, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = issuesList.map(issue => `
+                <div class="issue-card" onclick="showIssueDetail(${issue.id})">
+                    <div style="height: 8px; background: ${getPriorityColor(issue.priority)}; width: 100%;"></div>
+                    ${issue.images && issue.images.length > 0 ? 
+                        `<img src="${issue.images[0]}" class="issue-image" alt="${issue.title}">` :
+                        `<div class="issue-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); font-size: 3rem;">${getCategoryIcon(issue.category)}</div>`
+                    }
+                    <div class="issue-content">
+                        <div class="issue-header">
+                            <span class="issue-category category-${issue.category}">${getCategoryIcon(issue.category)} ${issue.category}</span>
+                            <span class="issue-status status-${issue.status}">${formatStatus(issue.status)}</span>
+                        </div>
+                        <h3 class="issue-title">${issue.title}</h3>
+                        <p class="issue-description">${issue.description}</p>
+                        <div class="issue-meta">
+                            <span class="issue-location">📍 ${truncateText(issue.location, 30)}</span>
+                            <div class="issue-votes">
+                                <button class="vote-btn ${votedIssues.includes(issue.id) ? 'voted' : ''}" onclick="event.stopPropagation(); toggleVote(${issue.id})">
+                                    👍 ${issue.votes}
+                                </button>
+                            </div>
+                        </div>
+                        <div style="margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-secondary);">
+                            ${formatDate(issue.date)} • by ${issue.reporter || 'Anonymous'}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderMyIssues() {
+            const myIssues = issues.filter(i => i.email && i.email === localStorage.getItem('user-email'));
+            if (myIssues.length === 0) {
+                document.getElementById('my-issues-grid').innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="empty-icon">📝</div>
+                        <h3>No reports yet</h3>
+                        <p>You haven't submitted any issues yet.</p>
+                    </div>
+                `;
+            } else {
+                renderIssues(myIssues, 'my-issues-grid');
+            }
+        }
+
+        // Detail View
+        function showIssueDetail(id) {
+            const issue = issues.find(i => i.id === id);
+            if (!issue) return;
+
+            currentIssueId = id;
+            
+            document.getElementById('detail-category').textContent = `${getCategoryIcon(issue.category)} ${issue.category}`;
+            document.getElementById('detail-category').className = `issue-category category-${issue.category}`;
+            document.getElementById('detail-status').textContent = formatStatus(issue.status);
+            document.getElementById('detail-status').className = `issue-status status-${issue.status}`;
+            document.getElementById('detail-title').textContent = issue.title;
+            document.getElementById('detail-description').textContent = issue.description;
+            document.getElementById('detail-location').textContent = issue.location;
+            document.getElementById('detail-reporter').textContent = issue.reporter || 'Anonymous';
+            document.getElementById('detail-date').textContent = formatDate(issue.date);
+            document.getElementById('detail-id').textContent = `ID: #${String(issue.id).padStart(4, '0')}`;
+            document.getElementById('detail-votes').textContent = issue.votes;
+            
+            const voteBtn = document.getElementById('detail-vote-btn');
+            if (votedIssues.includes(id)) {
+                voteBtn.classList.add('voted');
+                voteBtn.innerHTML = `✓ Supported (${issue.votes})`;
+            } else {
+                voteBtn.classList.remove('voted');
+                voteBtn.innerHTML = `👍 Support Issue (${issue.votes})`;
+            }
+
+            // Render comments
+            const commentsList = document.getElementById('comments-list');
+            if (issue.comments && issue.comments.length > 0) {
+                commentsList.innerHTML = issue.comments.map(comment => `
+                    <div class="comment">
+                        <div class="comment-avatar" style="${comment.official ? 'background: linear-gradient(135deg, #059669, #10b981);' : ''}">
+                            ${comment.author.charAt(0).toUpperCase()}
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-author">
+                                ${comment.author} ${comment.official ? '<span style="color: var(--secondary); font-size: 0.75rem;">✓ Official</span>' : ''}
+                            </div>
+                            <div class="comment-time">${formatDate(comment.time)}</div>
+                            <p>${comment.text}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                commentsList.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 2rem;">No updates yet.</p>';
+            }
+
+            showView('detail');
+        }
+
+        // Voting
+        function toggleVote(id) {
+            const issue = issues.find(i => i.id === id);
+            if (!issue) return;
+
+            if (votedIssues.includes(id)) {
+                issue.votes--;
+                votedIssues = votedIssues.filter(v => v !== id);
+                showToast('Vote removed', '👎');
+            } else {
+                issue.votes++;
+                votedIssues.push(id);
+                showToast('Issue supported!', '👍');
+            }
+
+            localStorage.setItem('voted-issues', JSON.stringify(votedIssues));
+            saveIssues();
+            filterIssues();
+            updateStats();
+        }
+
+        function toggleVoteDetail() {
+            if (currentIssueId) {
+                toggleVote(currentIssueId);
+                showIssueDetail(currentIssueId);
+            }
+        }
+
+        // Comments
+        function addComment() {
+            const input = document.getElementById('comment-input');
+            const text = input.value.trim();
+            if (!text || !currentIssueId) return;
+
+            const issue = issues.find(i => i.id === currentIssueId);
+            if (!issue.comments) issue.comments = [];
+            
+            issue.comments.push({
+                author: "You",
+                text: text,
+                time: new Date().toISOString(),
+                official: false
+            });
+
+            saveIssues();
+            input.value = '';
+            showIssueDetail(currentIssueId);
+            showToast('Comment added', '💬');
+        }
+
+        // Modal
+        function openModal() {
+            document.getElementById('modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.body.style.overflow = '';
+            document.getElementById('report-form').reset();
+            selectedFiles = [];
+            document.getElementById('file-preview').innerHTML = '';
+        }
+
+        // File Handling
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            processFiles(files);
+        }
+
+        function setupDragDrop() {
+            const uploadArea = document.querySelector('.file-upload');
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = 'var(--primary)';
+                uploadArea.style.background = 'rgba(37, 99, 235, 0.05)';
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = 'var(--border)';
+                uploadArea.style.background = '';
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = 'var(--border)';
+                uploadArea.style.background = '';
+                const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+                processFiles(files);
+            });
+        }
+
+        function processFiles(files) {
+            const preview = document.getElementById('file-preview');
+            
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    selectedFiles.push(e.target.result);
+                    preview.innerHTML += `<img src="${e.target.result}" class="preview-img" alt="Preview">`;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Submit Issue
+        function submitIssue(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('issue-title').value;
+            const category = document.getElementById('issue-category').value;
+            const priority = document.getElementById('issue-priority').value;
+            const description = document.getElementById('issue-description').value;
+            const location = document.getElementById('issue-location').value;
+            const reporter = document.getElementById('issue-reporter').value;
+            const email = document.getElementById('issue-email').value;
+
+            if (email) {
+                localStorage.setItem('user-email', email);
+            }
+
+            const newIssue = {
+                id: Date.now(),
+                title,
+                category,
+                priority,
+                description,
+                location,
+                reporter: reporter || 'Anonymous',
+                email: email || '',
+                date: new Date().toISOString(),
+                status: 'pending',
+                votes: 0,
+                images: selectedFiles,
+                comments: []
+            };
+
+            issues.unshift(newIssue);
+            saveIssues();
+            
+            closeModal();
+            updateStats();
+            filterIssues();
+            showToast('Issue reported successfully!', '✅');
+            
+            if (currentView === 'my-reports') {
+                renderMyIssues();
+            }
+        }
+
+        // Utilities
+        function updateStats() {
+            const total = issues.length;
+            const resolved = issues.filter(i => i.status === 'resolved').length;
+            const progress = issues.filter(i => i.status === 'progress').length;
+            const uniqueCitizens = new Set(issues.map(i => i.email).filter(Boolean)).size;
+
+            animateValue('stat-reported', parseInt(document.getElementById('stat-reported').textContent), total, 1000);
+            animateValue('stat-resolved', parseInt(document.getElementById('stat-resolved').textContent), resolved, 1000);
+            animateValue('stat-progress', parseInt(document.getElementById('stat-progress').textContent), progress, 1000);
+            animateValue('stat-citizens', parseInt(document.getElementById('stat-citizens').textContent), uniqueCitizens || 1, 1000);
+        }
+
+        function animateValue(id, start, end, duration) {
+            if (start === end) return;
+            const range = end - start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            const obj = document.getElementById(id);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                obj.textContent = current;
+                if (current === end) clearInterval(timer);
+            }, stepTime > 0 ? stepTime : 10);
+        }
+
+        function showToast(message, icon = '✅') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            document.getElementById('toast-icon').textContent = icon;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function shareIssue() {
+            const issue = issues.find(i => i.id === currentIssueId);
+            if (!issue) return;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: issue.title,
+                    text: issue.description,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                showToast('Link copied to clipboard!', '🔗');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            nav.style.position = 'absolute';
+            nav.style.top = '100%';
+            nav.style.left = '0';
+            nav.style.right = '0';
+            nav.style.background = 'var(--surface)';
+            nav.style.flexDirection = 'column';
+            nav.style.padding = '1rem';
+            nav.style.boxShadow = 'var(--shadow-lg)';
+            nav.style.borderTop = '1px solid var(--border)';
+        }
+
+        // Helpers
+        function getCategoryIcon(category) {
+            const icons = {
+                pothole: '🕳️',
+                streetlight: '💡',
+                garbage: '🗑️',
+                water: '💧',
+                road: '🛣️',
+                other: '📋'
+            };
+            return icons[category] || '📋';
+        }
+
+        function formatStatus(status) {
+            const statuses = {
+                pending: 'Pending',
+                progress: 'In Progress',
+                resolved: 'Resolved'
+            };
+            return statuses[status] || status;
+        }
+
+        function getPriorityColor(priority) {
+            const colors = {
+                high: '#dc2626',
+                medium: '#d97706',
+                low: '#2563eb'
+            };
+            return colors[priority] || '#6b7280';
+        }
+
+        function truncateText(text, maxLength) {
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + '...';
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = (now - date) / 1000;
+
+            if (diff < 60) return 'Just now';
+            if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+            if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+            if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`;
+            
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        // Close modal on outside click
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modal')) closeModal();
+        });
+
+        // Enter key for comments
+        document.getElementById('comment-input')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addComment();
+        });
+    </script>
+</body>
+</html>

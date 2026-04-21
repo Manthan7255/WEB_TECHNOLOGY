@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Admin } from '../admin/admin';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
