@@ -1,0 +1,43 @@
+<div class="cart-container">
+  <h1 class="cart-title">🛒 Your Shopping Cart</h1>
+
+  <div *ngIf="cartItems.length === 0" class="empty-cart">
+    <div class="empty-icon">🛍️</div>
+    <h2>Your cart is empty!</h2>
+    <p>Looks like you haven't added anything yet.</p>
+    <a routerLink="/" class="btn-continue">← Continue Shopping</a>
+  </div>
+
+  <div *ngIf="cartItems.length > 0" class="cart-content">
+    <div class="cart-items">
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <img [src]="item.image" [alt]="item.name" class="item-image">
+        <div class="item-details">
+          <h3>{{ item.name }}</h3>
+          <p class="item-price">₹{{ item.price }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <h3>Order Summary</h3>
+      <div class="summary-row">
+        <span>Items:</span>
+        <span>{{ cartItems.length }}</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total:</span>
+        <span>₹{{ totalPrice }}</span>
+      </div>
+      
+      <div class="cart-actions">
+        <a routerLink="/checkout" class="btn-checkout">
+          Proceed to Checkout →
+        </a>
+        <button (click)="clearCart()" class="btn-clear">
+          Clear Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

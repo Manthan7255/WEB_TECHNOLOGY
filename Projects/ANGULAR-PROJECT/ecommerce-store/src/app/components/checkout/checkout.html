@@ -1,0 +1,48 @@
+<div class="checkout-container">
+  <h1 class="checkout-title">💳 Checkout</h1>
+
+  <div *ngIf="orderPlaced" class="success-message">
+    <div class="success-icon">✅</div>
+    <h1>Order Placed Successfully!</h1>
+    <p>Thank you for shopping with us. Your order will be delivered soon.</p>
+    <a routerLink="/" class="btn-home">← Continue Shopping</a>
+  </div>
+
+  <div *ngIf="!orderPlaced" class="checkout-form-container">
+    <div class="order-summary">
+      <h3>📦 Order Summary</h3>
+      <div class="summary-info">
+        <p><span>Total Items:</span> <strong>{{ cartService.getCartItems().length }}</strong></p>
+        <p><span>Total Price:</span> <strong class="price">₹{{ cartService.getTotalPrice() }}</strong></p>
+      </div>
+    </div>
+
+    <div class="customer-form">
+      <h3>👤 Customer Details</h3>
+      
+      <div class="form-group">
+        <label>Full Name</label>
+        <input [(ngModel)]="customer.name" name="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input [(ngModel)]="customer.email" name="email" placeholder="Enter your email" required type="email">
+      </div>
+
+      <div class="form-group">
+        <label>Delivery Address</label>
+        <textarea [(ngModel)]="customer.address" name="address" placeholder="Enter your complete address" required rows="3"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input [(ngModel)]="customer.phone" name="phone" placeholder="Enter your phone number" required type="tel">
+      </div>
+
+      <button (click)="placeOrder()" class="btn-place-order">
+        Place Order
+      </button>
+    </div>
+  </div>
+</div>
