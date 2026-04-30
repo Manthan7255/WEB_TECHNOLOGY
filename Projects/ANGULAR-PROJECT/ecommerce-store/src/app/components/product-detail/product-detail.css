@@ -1,110 +1,93 @@
 .detail-container {
-  max-width: 1000px;
-  margin: 40px auto;
+  max-width: 800px;
+  margin: 30px auto;
   padding: 20px;
 }
 
 .product-detail {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  background: white;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
 }
 
 .detail-image {
-  height: 500px;
-  overflow: hidden;
+  width: 50%;
 }
 
 .detail-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  border-radius: 8px;
 }
 
 .detail-info {
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 50%;
+  padding: 10px;
 }
 
 .detail-name {
-  font-size: 32px;
+  font-size: 28px;
+  margin-bottom: 10px;
   color: #333;
-  margin-bottom: 15px;
 }
 
 .detail-price {
-  color: #e74c3c;
-  font-size: 36px;
+  color: green;
+  font-size: 24px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .detail-desc {
   color: #666;
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .detail-buttons {
   display: flex;
-  gap: 15px;
+  gap: 10px;
 }
 
 .btn-add-cart {
-  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  background-color: #28a745;
   color: white;
-  padding: 15px 35px;
+  padding: 10px 25px;
   border: none;
-  border-radius: 30px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  font-size: 16px;
 }
 
 .btn-add-cart:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 20px rgba(17, 153, 142, 0.4);
+  background-color: #218838;
 }
 
 .btn-back {
-  display: inline-block;
-  background: #6c757d;
+  background-color: #6c757d;
   color: white;
-  padding: 15px 30px;
+  padding: 10px 20px;
   text-decoration: none;
-  border-radius: 30px;
-  font-size: 16px;
-  transition: all 0.3s ease;
+  border-radius: 4px;
+  display: inline-block;
 }
 
 .btn-back:hover {
-  background: #5a6268;
-  transform: scale(1.05);
+  background-color: #5a6268;
 }
 
 .not-found {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
-.not-found h2 {
-  color: #e74c3c;
-  margin-bottom: 20px;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .product-detail {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
-  .detail-image {
-    height: 300px;
+  .detail-image, .detail-info {
+    width: 100%;
   }
 }
